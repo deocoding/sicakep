@@ -1,0 +1,123 @@
+{% extends 'kinerja/base.html' %}
+{% block content %}
+<br>
+<div class="container-fluid">
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <a class="btn btn-outline-info btn-sm btn-block" href="">Tambah Sasaran Kegiatan</a>
+                <a class="btn btn-outline-secondary btn-sm btn-block" href="">Tambah Capaian Kinerja</a>
+                <a class="btn btn-outline-secondary btn-sm btn-block" href="">Tambah Kegiatan Tugas Jabatan</a>
+            </div>
+        </div>
+
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Informasi Pegawai :</h5>
+                <a class="btn btn-sm btn-secondary" href="">Ubah</a>
+                <hr>
+                <table class="table table-striped table-sm">
+                    <tr>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td>{{pegawai.nama}}</td>
+                    </tr>
+                    <tr>
+                        <td>NIP</td>
+                        <td>:</td>
+                        <td>{{pegawai.nip}}</td>
+                    </tr>
+                    <tr>
+                        <td>Jabatan</td>
+                        <td>:</td>
+                        <td>{{pegawai.jabatan}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Informasi Pejabat Penilai :</h5>
+                <a class="btn btn-sm btn-secondary" href="">Ubah</a>
+                <hr>
+                <table class="table table-striped table-sm">
+                    <tr>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td>{{penilai.atasan}}</td>
+                    </tr>
+                    <tr>
+                        <td>NIP</td>
+                        <td>:</td>
+                        <td>{{penilai.atasan.nip}}</td>
+                    </tr>
+                    <tr>
+                        <td>Jabatan</td>
+                        <td>:</td>
+                        <td>{{penilai.atasan.jabatan}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+<!-- 
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Total Laporan</h5>
+                <hr>
+                <h1 style="text-align: center;padding: 10px">{{total_laporan}}</h1>
+            </div>
+        </div> -->
+    </div>
+
+
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {{myFilter.form}}
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </form>
+            </div>
+        </div>
+        
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm table-responsive-lg table-bordered">
+                    <tr class="text-center">
+                        <th rowspan="2">Kegiatan Tugas Jabatan</th>
+                        <th colspan="2">Target</th>
+                        <th colspan="2">Realisasi</th>
+                        <th rowspan="2">Nilai</th>
+                        <th rowspan="2">Aksi</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th>Kuantitas/Output</th>
+                        <th>Kual/Mutu</th>
+                        <th>Kuantitas/Output</th>
+                        <th>Kual/Mutu</th>
+                    </tr>
+                    {% for i in target_kegiatan %}
+                    <tr>
+                        <td>{{i.kegiatan}}</td>
+                        <td class="text-center">{{i.target_kuantitas}} {{i.satuan}}</td>
+                        <td class="text-center">{{i.target_mutu}}</td>
+                        <td class="text-center">{{i.realisasi_kuantitas}} {{i.satuan}}</td>
+                        <td class="text-center">{{i.realisasi_mutu}}</td>
+                        <td class="text-center">{{i.nilai}}</td>
+                        <td class="text-center"><a class="btn btn-sm btn-warning" href="">Ubah</a> | <a class="btn btn-sm btn-danger" href="">Hapus</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
