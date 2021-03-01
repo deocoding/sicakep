@@ -34,7 +34,7 @@ class Penilai(models.Model):
     pangkat = models.CharField(max_length=100, null=True)
     golrung = models.CharField(verbose_name='Golongan/Ruang', max_length=5, null=True)
     jabatan = models.ForeignKey(Jabatan, null=True, blank=True, on_delete=models.SET_NULL)
-    dinilai = models.ForeignKey(Pegawai, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Pegawai Yang Dinilai')
+    pegawai = models.ForeignKey(Pegawai, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Pegawai Yang Dinilai')
 
     def __str__(self):
         return self.nama

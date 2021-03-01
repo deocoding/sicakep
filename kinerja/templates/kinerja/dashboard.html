@@ -22,7 +22,7 @@
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td>{{pegawai.nama}}</td>
+                        <td>{{pegawai}}</td>
                     </tr>
                     <tr>
                         <td>NIP</td>
@@ -51,17 +51,17 @@
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td>{{penilai.atasan}}</td>
+                        <td>{{penilai}}</td>
                     </tr>
                     <tr>
                         <td>NIP</td>
                         <td>:</td>
-                        <td>{{penilai.atasan.nip}}</td>
+                        <td>{{penilai.nip}}</td>
                     </tr>
                     <tr>
                         <td>Jabatan</td>
                         <td>:</td>
-                        <td>{{penilai.atasan.jabatan}}</td>
+                        <td>{{penilai.jabatan}}</td>
                     </tr>
                 </table>
             </div>
@@ -113,6 +113,9 @@
                         <td>{{i.kegiatan}}</td>
                         <td class="text-center">{{i.target_kuantitas}} {{i.satuan}}</td>
                         <td class="text-center">{{i.target_mutu}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td class="text-center"><a class="btn btn-sm btn-warning" href="">Ubah</a> | <a class="btn btn-sm btn-danger" href="">Hapus</a></td>
                     </tr>
                     {% endfor %}

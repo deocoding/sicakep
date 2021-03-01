@@ -22,9 +22,9 @@ class PegawaiAdmin(admin.ModelAdmin):
 
 @admin.register(Penilai)
 class PenilaiAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['dinilai', ]
-    list_display = ("nama", "nip", "dinilai")    
-    search_fields = (["nama", "nip", "dinilai__nama"])
+    autocomplete_fields = ['pegawai', ]
+    list_display = ("nama", "nip", "pegawai")    
+    search_fields = (["nama", "nip", "pegawai__nama"])
 
 
 @admin.register(Sasaran)
