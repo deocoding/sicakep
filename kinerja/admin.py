@@ -48,7 +48,7 @@ class IndikatorAdmin(admin.ModelAdmin):
 
 admin.site.register(BulanPenyelesaian)
 
-@admin.register(Kegiatan)
+@admin.register(TargetKegiatan)
 class KegiatanAdmin(admin.ModelAdmin):
     autocomplete_fields = ['pegawai', 'indikator', 'satuan', ]
     list_display = ("pegawai", "indikator", "kegiatan")    

@@ -1,8 +1,6 @@
 from typing import ClassVar
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.base import Model
-from django.db.models.fields import BLANK_CHOICE_DASH
 
 
 class Jabatan(models.Model):
@@ -76,11 +74,6 @@ class BulanPenyelesaian(models.Model):
 class Indikator(models.Model):
     sasaran = models.ForeignKey(Sasaran, null=True, on_delete=models.CASCADE, verbose_name='Sasaran Kegiatan')
     nama = models.TextField('Indikator Kinerja', max_length=500, null=True)
-    # target_mutu = models.IntegerField(null=True, default=100, verbose_name='Target Mutu')
-    # target_kuantitas = models.IntegerField(null=True, default=1)
-    # satuan = models.ForeignKey(Satuan, null=True, on_delete=models.SET_NULL)
-    # waktu_penyelesaian = models.ManyToManyField(BulanPenyelesaian)
-    # pagu_anggaran = models.DecimalField(decimal_places=2, max_digits=15, null=True, blank=True)
 
     def __str__(self):
         return self.nama
@@ -89,26 +82,26 @@ class Indikator(models.Model):
         verbose_name_plural = ' Indikator Kinerja'
 
 
-class Kegiatan(models.Model):
+class TargetKegiatan(models.Model):
     pegawai = models.ForeignKey(Pegawai, null=True, on_delete=models.CASCADE, verbose_name='Nama Pegawai')
-    bulan = models.OneToOneField(BulanPenyelesaian, null=True, on_delete=models.CASCADE, verbose_name='Bulan')
+    # bulan = models.OneToOneField(BulanPenyelesaian, null=True, on_delete=models.CASCADE, verbose_name='Bulan')
     indikator = models.ForeignKey(Indikator, null=True, on_delete=models.CASCADE, verbose_name='Indikator Kegiatan')
     kegiatan = models.TextField('Kegiatan Tugas Jabatan', max_length=500, null=True)
     target_kuantitas = models.IntegerField(null=True, default=1, verbose_name='Target Kuantitas')
     satuan = models.ForeignKey(Satuan, null=True, on_delete=models.SET_NULL)
     target_mutu = models.IntegerField(null=True, default=100, verbose_name='Target Mutu')
-    realisasi_kuantitas = models.IntegerField(null=True, default=1, verbose_name='Realisasi Kuantitas')
-    realisasi_mutu = models.IntegerField(null=True, default=0, verbose_name='Realisasi Mutu')
+    # realisasi_kuantitas = models.IntegerField(null=True, default=1, verbose_name='Realisasi Kuantitas')
+    # realisasi_mutu = models.IntegerField(null=True, default=0, verbose_name='Realisasi Mutu')
 
     def __str__(self):
         return self.kegiatan
 
-    def nilai(self):
-        nilai = (self.target_mutu + self.realisasi_mutu) / 2
-        return nilai
+    # def nilai(self):
+    #     nilai = (self.target_mutu + self.realisasi_mutu) / 2
+    #     return nilai
 
     class Meta:
-        verbose_name_plural = 'Kegiatan Tugas Jabatan'
-        unique_together = ('pegawai', 'bulan', 'indikator', )
+        verbose_name_plural = 'Kegiatan'
+        unique_together = ('pegawai', 'indikator', 'kegiatan', )
 
         
