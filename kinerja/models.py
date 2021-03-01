@@ -28,12 +28,16 @@ class Pegawai(models.Model):
         verbose_name_plural = '      Pegawai'
 
 
-class PejabatPenilai(models.Model):
-    atasan = models.ForeignKey(Pegawai, null=True, blank=True, on_delete=models.SET_NULL, related_name='atasan', verbose_name='Pejabat Penilai')
-    pegawai = models.ForeignKey(Pegawai, null=True, blank=True, on_delete=models.SET_NULL, related_name='pegawai', verbose_name='Pegawai Yang Dinilai')
+class Penilai(models.Model):
+    nama = models.CharField(verbose_name='Nama Pejabat', max_length=100, null=True)
+    nip = models.CharField(verbose_name='NIP', max_length=21, null=True)
+    pangkat = models.CharField(max_length=100, null=True)
+    golrung = models.CharField(verbose_name='Golongan/Ruang', max_length=5, null=True)
+    jabatan = models.ForeignKey(Jabatan, null=True, blank=True, on_delete=models.SET_NULL)
+    dinilai = models.ForeignKey(Pegawai, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Pegawai Yang Dinilai')
 
     def __str__(self):
-        return self.atasan.nama
+        return self.nama
 
     class Meta:
         verbose_name_plural = '     Pejabat Penilai'
@@ -103,5 +107,24 @@ class TargetKegiatan(models.Model):
     class Meta:
         verbose_name_plural = 'Kegiatan'
         unique_together = ('pegawai', 'indikator', 'kegiatan', )
+
+class RealisasiKegiatan(models.Model):
+    target = models.ForeignKey(TargetKegiatan, null=True, on_delete=models.CASCADE, verbose_name='Target Kegiatan')
+    realisasi_kuantitas = models.IntegerField(null=True, default=1, verbose_name='Realisasi Kuantitas')
+    realisasi_mutu = models.IntegerField(null=True, default=100, verbose_name='Realisasi Mutu')
+    bulan = models.ForeignKey(BulanPenyelesaian, null=True, on_delete=models.CASCADE, verbose_name='Realisasi Bulan')
+    # realisasi_kuantitas = models.IntegerField(null=True, default=1, verbose_name='Realisasi Kuantitas')
+    # realisasi_mutu = models.IntegerField(null=True, default=0, verbose_name='Realisasi Mutu')
+
+    def __str__(self):
+        return self.target.kegiatan
+
+    # def nilai(self):
+    #     nilai = (self.target_mutu + self.realisasi_mutu) / 2
+    #     return nilai
+
+    class Meta:
+        verbose_name_plural = 'Realisasi'
+        unique_together = ('bulan', 'target')
 
         

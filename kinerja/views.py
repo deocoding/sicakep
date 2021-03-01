@@ -50,11 +50,11 @@ def logoutPage(request):
 @login_required(login_url='login')
 def home(request):
     pegawai = request.user.pegawai
-    penilai = PejabatPenilai.objects.filter(pegawai=pegawai).get()
+    penilai = pegawai.penilai_set.all()
 
-    target_kegiatan = pegawai.kegiatan_set.all()
+    target_kegiatan = pegawai.targetkegiatan_set.all()
 
-    # print(target_kegiatan)
+    print(penilai)
     context = {
         'pegawai': pegawai,
         'penilai': penilai,

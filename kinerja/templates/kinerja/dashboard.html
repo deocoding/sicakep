@@ -41,7 +41,11 @@
         <div class="col-md">
             <div class="card card-body">
                 <h5>Informasi Pejabat Penilai :</h5>
+                {% if penilai %}
                 <a class="btn btn-sm btn-secondary" href="">Ubah</a>
+                {% else %}
+                <a class="btn btn-sm btn-secondary" href="">Tambah</a>
+                {% endif %}
                 <hr>
                 <table class="table table-striped table-sm">
                     <tr>
@@ -109,9 +113,6 @@
                         <td>{{i.kegiatan}}</td>
                         <td class="text-center">{{i.target_kuantitas}} {{i.satuan}}</td>
                         <td class="text-center">{{i.target_mutu}}</td>
-                        <td class="text-center">{{i.realisasi_kuantitas}} {{i.satuan}}</td>
-                        <td class="text-center">{{i.realisasi_mutu}}</td>
-                        <td class="text-center">{{i.nilai}}</td>
                         <td class="text-center"><a class="btn btn-sm btn-warning" href="">Ubah</a> | <a class="btn btn-sm btn-danger" href="">Hapus</a></td>
                     </tr>
                     {% endfor %}

@@ -20,11 +20,11 @@ class PegawaiAdmin(admin.ModelAdmin):
     search_fields = (["nama", "nip", "jabatan__nama"])
 
 
-@admin.register(PejabatPenilai)
-class PejabatPenilaiAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['atasan', 'pegawai']
-    list_display = ("atasan", "pegawai")    
-    search_fields = (["atasan__nama", "pegawai__nama"])
+@admin.register(Penilai)
+class PenilaiAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['dinilai', ]
+    list_display = ("nama", "nip", "dinilai")    
+    search_fields = (["nama", "nip", "dinilai__nama"])
 
 
 @admin.register(Sasaran)
@@ -49,8 +49,14 @@ class IndikatorAdmin(admin.ModelAdmin):
 admin.site.register(BulanPenyelesaian)
 
 @admin.register(TargetKegiatan)
-class KegiatanAdmin(admin.ModelAdmin):
+class TargetKegiatanAdmin(admin.ModelAdmin):
     autocomplete_fields = ['pegawai', 'indikator', 'satuan', ]
     list_display = ("pegawai", "indikator", "kegiatan")    
     search_fields = (["pegawai__nama", "indikator__nama", "kegiatan"])
+
+@admin.register(RealisasiKegiatan)
+class RealisasiKegiatanAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['target' ]
+    list_display = ("target", "bulan", )    
+    # search_fields = (["target", ])
 
